@@ -4,13 +4,32 @@ This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
+> **_NOTE:_** Go to src/main/resources on the terminal and run the below to generate the keys.
+#Create a Private key
+```shell script
+openssl req -newkey rsa:2048 -new -nodes -keyout privatekey.pem -out csr.pem
+```
+#Create a Public key
+```shell script
+openssl rsa -in privatekey.pem -pubout > publickey.pem
+```
+
 ## Running the application in dev mode
 
 You can run your application in dev mode that enables live coding using:
 ```shell script
 ./mvnw compile quarkus:dev
 ```
+> **_NOTE:_** Creating a Jwt Token.
+> 
+```
+POST http://localhost:8080/api/auth/login
 
+{
+    "username": "user",
+    "password": "user"
+}
+```
 > **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
 
 ## Packaging and running the application
